@@ -3,11 +3,7 @@
 #include<string.h>
 #include<ctype.h>
 #include<stdlib.h>
-/*typedef struct{
-     char name[20];
-     char email[50];
-     char password[50]; 
-} userData; */
+
 bool password_verify(password);
 char* vemail();
 int signUpFunc() ; 
@@ -16,11 +12,8 @@ int home() ;
 int main()
 {
 	
-  logInFunc() ; 
+  signUpFunc() ; 
 }
-/*int home() {
-	
-} */
 char readRole(char filePath[]) {
 	int count = 0 ;
 	FILE *filePtr = fopen(filePath , "r") ; 
@@ -39,6 +32,40 @@ char readRole(char filePath[]) {
     }
     fclose(filePtr);
 	}
+	
+void encrypted_pass(char password[]){
+	int counter;
+	for(counter = 0; (counter < 100 && password[counter] != '\0'); counter++){
+        password[counter] = password[counter] + 3;
+	}
+}
+
+void decrypted_pass(char password[]){
+	int counter;
+	for(counter = 0; (counter < 100 && password[counter] != '\0'); counter++){
+        password[counter] = password[counter] - 3;
+	}
+}
+
+void hide_pass(char password[]){
+	char character;
+	int counter=0 , i;
+	while((character=_getch())!=13 ){
+		if(character == 8 ) {
+			fflush(stdout) ; 
+			printf("\b \b") ; 
+			password[--counter] = '\0' ; 
+			continue ; 
+		}
+		printf("*") ;
+		password[counter]=character;
+		counter++;
+		
+		}
+	
+	
+	password[counter]='\0';
+}
 int profile(char filePath[]) {
 	char role = readRole(filePath) ;
 	FILE *filePtr = fopen(filePath , "r") ;
@@ -48,7 +75,9 @@ int profile(char filePath[]) {
     while (fgets(line, sizeof line, filePtr) != NULL) 
     {
 	if(counter == 0) {
+		decrypted_pass(line) ; 
 		printf("Password : %s" , line) ; 
+		
 		counter++ ; 
 	} else if(counter == 1) {
 			printf("Role : %s" , line) ;
@@ -68,6 +97,7 @@ int profile(char filePath[]) {
 int signUpFunc() {
 	char role;
 	char Name[20],email[30];
+		char filePath[50] ;
 	printf("For which type you want to create an account(customer , hotel , or resturant)\n(c for customer , h for hotel ,  r for restaurant):");
 	fflush(stdin) ; 
 	scanf("%c",&role);
@@ -84,13 +114,13 @@ int signUpFunc() {
     while(1){
 	printf("\ncreate your password:");
 	fflush(stdin) ; 
-	gets(password);
+	hide_pass(password);
 	bool result=password_verify(password);
 	if (result){
 	while(1)
 	{
 	printf("\ncomfirm your password:");
-	scanf("%s",&cPassword);
+	hide_pass(cPassword);
 	int x;
 	x=strcmp(password,cPassword);
 	if(x>0||x<0)
@@ -100,6 +130,19 @@ int signUpFunc() {
 	}
 	else
 	{printf("\n\t\t..account created..\n\n");
+	encrypted_pass(password);
+	system("cls") ;   
+	FILE *fPtr ;
+	counter = 0 ;
+
+	strcpy(filePath , email) ;  
+	strcat(filePath , ".txt"); 
+		fPtr = fopen(filePath , "a") ;  
+		fprintf(fPtr , "%s\n" , password); 
+		fprintf(fPtr , "%c\n" , role) ; 
+		fprintf(fPtr , "%s\n" , email);  
+		fprintf(fPtr , "%s\n" , Name); 
+    fclose(fPtr) ;
 	break;
 	}
 	}
@@ -110,18 +153,7 @@ int signUpFunc() {
 	 continue;
 	}
 	} 
-	system("cls") ;   
-	FILE *fPtr ;
-	counter = 0 ;
-	char filePath[50] ;
-	strcpy(filePath , email) ;  
-	strcat(filePath , ".txt"); 
-		fPtr = fopen(filePath , "a") ;  
-		fprintf(fPtr , "%s\n" , password); 
-		fprintf(fPtr , "%c\n" , role) ; 
-		fprintf(fPtr , "%s\n" , email);  
-		fprintf(fPtr , "%s\n" , Name); 
-    fclose(fPtr) ;
+	
 	return 0 ;   
 }
 int logInFunc() {
