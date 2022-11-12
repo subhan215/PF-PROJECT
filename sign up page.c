@@ -12,7 +12,7 @@ int home() ;
 int main()
 {
 	
-  signUpFunc() ; 
+    logInFunc() ; 
 }
 char readRole(char filePath[]) {
 	int count = 0 ;
@@ -80,7 +80,7 @@ int profile(char filePath[]) {
 		
 		counter++ ; 
 	} else if(counter == 1) {
-			printf("Role : %s" , line) ;
+			printf("\nRole : %s" , line) ;
 			counter++ ;  
 	} else if(counter == 2) {
 			printf("Email : %s" , line) ;
@@ -174,6 +174,7 @@ int logInFunc() {
 	    int length = strlen(password) ; 
 		char filePass[length + 1] ;  
 		fgets(filePass, sizeof(filePass) , fPtr) ; 
+		decrypted_pass(filePass) ; 
 		int match = strcmp(password , filePass);
         if( match == 0) {
         	printf("Login Successfull!") ;
