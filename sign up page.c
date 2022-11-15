@@ -12,7 +12,7 @@ int home() ;
 int main()
 {
 	
-    logInFunc() ; 
+    resHomeFunc() ; 
 }
 char readRole(char filePath[]) {
 	int count = 0 ;
@@ -31,8 +31,18 @@ char readRole(char filePath[]) {
         }
     }
     fclose(filePtr);
-	}
-	
+	}	
+void resHomeFunc() {
+      FILE * homeFilePtr ;  
+      homeFilePtr = fopen("home page.txt" , "r") ; 
+      char line[50]; 
+			  while(fgets(line, sizeof line, homeFilePtr) != NULL){
+	        		 printf("%s" , line) ; 
+			
+			}
+	fclose(homeFilePtr) ; 
+}
+
 void encrypted_pass(char password[]){
 	int counter;
 	for(counter = 0; (counter < 100 && password[counter] != '\0'); counter++){
@@ -41,9 +51,9 @@ void encrypted_pass(char password[]){
 }
 
 void decrypted_pass(char password[]){
-	int counter;
-	for(counter = 0; (counter < 100 && password[counter] != '\0'); counter++){
-        password[counter] = password[counter] - 3;
+	int passCounter;
+	for(passCounter = 0; (passCounter < 100 && password[passCounter] != '\0'); passCounter++){
+        password[passCounter] = password[passCounter] - 3;
 	}
 }
 
@@ -62,36 +72,130 @@ void hide_pass(char password[]){
 		counter++;
 		
 		}
-	
-	
 	password[counter]='\0';
 }
-int profile(char filePath[]) {
-	char role = readRole(filePath) ;
-	FILE *filePtr = fopen(filePath , "r") ;
-	char line[50] ; 
-	int counter = 0 ;  
-	system("cls") ; 
-    while (fgets(line, sizeof line, filePtr) != NULL) 
+void readingDetails(int *counter ,  FILE* filePtr , char *role) {
+	 char line[50] ; 
+	 int i = 0 ; 
+	 while (fgets(line, sizeof line, filePtr) != NULL) 
     {
-	if(counter == 0) {
+	if(i == 0) {
 		decrypted_pass(line) ; 
 		printf("Password : %s" , line) ; 
 		
-		counter++ ; 
-	} else if(counter == 1) {
+		i++ ; 
+	} else if(i == 1) {
+		    *role = line[0] ; 
 			printf("\nRole : %s" , line) ;
-			counter++ ;  
-	} else if(counter == 2) {
+			i++ ;  
+	} else if(i == 2) {
 			printf("Email : %s" , line) ;
-			counter++ ;  
-	} else if(counter ==3 ) {
+			i++ ;  
+	} else if(i ==3 ) {
 			printf("User Name : %s" , line) ;
-			counter++ ;  
+			i++ ;  
+	} else {
+		printf("%s" , line) ; 
+		i++ ; 
 	}
-	} 
-	
-	
+	}
+	*counter = i  ; 
+}
+int profile(char filePath[]) {
+	char role ; 
+	FILE *filePtr = fopen(filePath , "r") ;
+	int counter = 0 ;  
+	system("cls") ; 
+    readingDetails(&counter , filePtr , &role) ;
+    fclose(filePtr) ; 
+	char menuAns ; 
+	if(counter == 4 && role == 'r') {
+		printf("\nYou have not entered your restautant details: ") ; 
+		printf("\nEnter it (Y or y/N or n): ") ;
+	 	fflush(stdin) ; 
+	 	scanf("%c" , &menuAns) ;
+	 	menuAns = menuAns < 91 ? menuAns + 26 : menuAns ;  
+	 		 if(menuAns == 'y') {
+	 		 	filePtr = fopen(filePath , "a") ; 
+		 	int typeCounter , dishesCounter;
+		 	char name[50]; 
+		 	printf("Enter your restaurant name: ") ; 
+		 	fflush(stdin) ; 
+		 	gets(name) ; 
+		 	printf("Enter how many types of dishes are there in your restaurant: ") ; 
+		 	scanf("%d" , &typeCounter) ; 
+		 	printf("Enter how many dishes in each type: ") ; 
+		 	scanf("%d" , &dishesCounter) ; 
+		 	char restaurantMenu[typeCounter][dishesCounter + 1][50];
+	        int restaurantMenuPrice[typeCounter][dishesCounter + 1] , i , j ; 
+		     for(i = 0 ; i < typeCounter  ; i++)  {
+		      	printf("Enter Dish type %d: " , i + 1) ; 
+		      	fflush(stdin) ; 
+		      	gets(restaurantMenu[i][0]) ; 
+				  for( j = 1 ; j <= dishesCounter  ; j++){
+				  	printf("Enter Dish %d Name : " , j) ;
+				  	fflush(stdin) ; 
+					gets(restaurantMenu[i][j]) ;
+					fflush(stdin) ;  
+					printf("Enter dish price: ") ; 
+					scanf("%d" , &restaurantMenuPrice[i][j]) ; 
+				  }  
+			} 
+			fprintf(filePtr, "%s", name) ; 
+			fprintf(filePtr , "\nYour Restaurant Menu: ") ; 
+			  for(i = 0 ;  i < typeCounter ; i++) {
+			  	for(j = 0 ; j < dishesCounter + 1 ; j++) {
+			  		if(j == 0 ) {
+			  			fprintf(filePtr , "\n%d: Dish Type : %s" , i+1,  restaurantMenu[i][j]) ; 
+					  }
+					else {
+						fprintf(filePtr , "\n%d: %s" , j, restaurantMenu[i][j]) ; 
+					}  
+				  }
+			  }
+			    for(i = 0 ;  i < typeCounter ; i++) {
+			  	for(j = 0 ; j < dishesCounter + 1 ; j++) {
+			  		if(j == 0 ) {
+			  			fprintf(filePtr , "\n%d: Dish Type : %s" ,i+1 ,  restaurantMenu[i][j]) ; 
+					  }
+					else {
+						fprintf(filePtr , "\n%d: %d" , j, restaurantMenuPrice[i][j]) ; 
+					}  
+				  }
+			  } 
+			  fclose(filePtr) ; 
+			  filePtr = fopen("home page.txt" , "a") ; 
+			  	fprintf(filePtr, "\n%s", name) ; 
+			fprintf(filePtr , "\nYour Restaurant Menu: ") ; 
+			  for(i = 0 ;  i < typeCounter ; i++) {
+			  	for(j = 0 ; j < dishesCounter + 1 ; j++) {
+			  		if(j == 0 ) {
+			  			fprintf(filePtr , "\n%d: Dish Type : %s" , i+1,  restaurantMenu[i][j]) ; 
+					  }
+					else {
+						fprintf(filePtr , "\n%d: %s" , j, restaurantMenu[i][j]) ; 
+					}  
+				  }
+			  }
+			    for(i = 0 ;  i < typeCounter ; i++) {
+			  	for(j = 0 ; j < dishesCounter + 1 ; j++) {
+			  		if(j == 0 ) {
+			  			fprintf(filePtr , "\n%d: Dish Type : %s" ,i+1 ,  restaurantMenu[i][j]) ; 
+					  }
+					else {
+						fprintf(filePtr , "\n%d: %d" , j, restaurantMenuPrice[i][j]) ; 
+					}  
+				  }
+			  } 
+			  counter = 0 ; 
+			  system("cls") ; 
+			  filePtr = fopen(filePath, "r") ; 
+			  readingDetails(&counter , filePtr , &role) ; 
+			  } 
+			  else {
+			  	printf("As your wish! ") ; 
+			  }
+	}
 }
 
 int signUpFunc() {
@@ -133,16 +237,23 @@ int signUpFunc() {
 	encrypted_pass(password);
 	system("cls") ;   
 	FILE *fPtr ;
+	FILE *resFPtr ; 
 	counter = 0 ;
 
 	strcpy(filePath , email) ;  
 	strcat(filePath , ".txt"); 
-		fPtr = fopen(filePath , "a") ;  
+		fPtr = fopen(filePath , "a") ;	  
 		fprintf(fPtr , "%s\n" , password); 
 		fprintf(fPtr , "%c\n" , role) ; 
 		fprintf(fPtr , "%s\n" , email);  
 		fprintf(fPtr , "%s\n" , Name); 
     fclose(fPtr) ;
+    resFPtr = fopen("restaurantAccounts.txt" , "a") ; 
+    if(role == 'r') {
+    	fprintf(resFPtr , "\n%s" , filePath) ; 
+	}
+	fclose(resFPtr) ; 
+    
 	break;
 	}
 	}

@@ -1,0 +1,42 @@
+Fast Food Restaurant
+Your Restaurant Menu: 
+1: Dish Type : Pakistani
+1: Biryani
+2: Pulao
+2: Dish Type : Indian
+1: Dosa
+2: Jalebi
+1: Dish Type : Pakistani
+1: 200
+2: 500
+2: Dish Type : Indian
+1: 100
+2: 150
+Chhipa BBQ
+Your Restaurant Menu: 
+1: Dish Type : BBQ
+1: Tikka
+2: Roll
+2: Dish Type : Pakistani
+1: Gol
+2: Biryani
+3: Dish Type : Indian
+1: Dosa
+2: Jalebi
+1: Dish Type : BBQ
+1: 200
+2: 150
+2: Dish Type : Pakistani
+1: 250
+2: 100
+3: Dish Type : Indian
+1: 130
+2: 100
+Taj Mahal
+Your Restaurant Menu: 
+1: Dish Type : Western
+1: Gellani
+2: Bihari Kabab
+1: Dish Type : Western
+1: 200
+2: 250

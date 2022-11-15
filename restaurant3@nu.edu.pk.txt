@@ -1,0 +1,12 @@
+Vxekdq45&7
+r
+restaurant3@nu.edu.pk
+restaurant3
+Taj Mahal
+Your Restaurant Menu: 
+1: Dish Type : Western
+1: Gellani
+2: Bihari Kabab
+1: Dish Type : Western
+1: 200
+2: 250
