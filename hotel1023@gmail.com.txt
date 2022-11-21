@@ -1,0 +1,32 @@
+Vxekdq45&7
+h
+hotel1023@gmail.com
+hotel10
+
+The lawrance
+Saddar , Karachi
+Hotel Free Facilities: 
+1: Swimming Pool
+2: Bar Club
+3: Gym
+description: This hotel is located at Saddar Karachi
+--->Room Details<---
+No Of Rooms : 100
+Single Bed Rooms: 
+No Of Rooms: 50
+Per Night Cost: 
+100
+--->Room Facilities<---
+Free Facilities: 
+1: Bathing
+2: Room Cleaning
+3: Indoor Cricket
+ Double-Bed Rooms:
+No Of Rooms: 25
+Per Night Cost: 
+500
+--->Room Facilities<---
+Free facilities :
+1: gathering
+2: joking
+3: planting
