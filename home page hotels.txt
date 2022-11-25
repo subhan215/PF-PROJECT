@@ -1,51 +1,36 @@
-The Marine
-Garden , Karachi
+
+Hotel 1
+Marine Resort
+National Highway, Karachi
 Hotel Free Facilities: 
 1: Swimming Pool
-2: Cricket Ground
-description: this is a good hotel
+2: Gym
+description: This is a good hotel
 --->Room Details<---
 No Of Rooms : 50
 Single Bed Rooms: 
 No Of Rooms: 2
 Per Night Cost: 
-2
+230
 --->Room Facilities<---
 Free Facilities: 
-1: Tv
-2: Bathing
-3: Room Cleaning
-Double-Bed Rooms:
-No Of Rooms: 3
-Per Night Cost: 
-200
---->Room Facilities<---
-Free facilities :
-1: Room Cleaning
-The lawrance
-Saddar , Karachi
+1: Bathin
+2: Room Cleaning
+Hotel 2
+Food Center
+Burns Road, Karachi
 Hotel Free Facilities: 
 1: Swimming Pool
-2: Bar Club
-3: Gym
-description: This hotel is located at Saddar Karachi
+2: Cricket Stadium
+description: this hotel name is food center
 --->Room Details<---
-No Of Rooms : 100
+No Of Rooms : 10
 Single Bed Rooms: 
-No Of Rooms: 50
+No Of Rooms: 5
 Per Night Cost: 
-50
+150
 --->Room Facilities<---
-Free Facilities: 
-1: Bathing
-2: Room Cleaning
-3: Indoor Cricket
- Double-Bed Rooms:
-No Of Rooms: 25
-Per Night Cost: 
-500
+Triple Bed Rooms: 
+No Of Rooms: 5
+Per Night Cost: 150
 --->Room Facilities<---
-Free facilities :
-1: gathering
-2: joking
-3: planting

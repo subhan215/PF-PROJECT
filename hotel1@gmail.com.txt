@@ -1,31 +1,21 @@
 Vxekdq45&7
 h
-hotel1@gmail.com°F@
+hotel1@gmail.com
 hotel1
 
-The Marine
-Garden , Karachi
+Marine Resort
+National Highway, Karachi
 Hotel Free Facilities: 
 1: Swimming Pool
-2: Cricket Ground
-description: this is a good hotel
+2: Gym
+description: This is a good hotel
 --->Room Details<---
 No Of Rooms : 50
 Single Bed Rooms: 
 No Of Rooms: 2
 Per Night Cost: 
-200
+230
 --->Room Facilities<---
 Free Facilities: 
-1: Tv
-2: Bathing
-3: Room Cleaning
-Paid Facilities: 
- Double-Bed Rooms:
-No Of Rooms: 20
-Per Night Cost: 
-500
---->Room Facilities<---
-Free facilities :
-1: Room Cleaning
-Paid Facilities: 
+1: Bathin
+2: Room Cleaning

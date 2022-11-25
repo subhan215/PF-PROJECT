@@ -11,29 +11,28 @@ int logInFunc() ;
 int main()
 {    
     logInFunc() ; 
-    return 0 ; 
+	    return 0 ; 
 }
-char readRole(char filePath[]) {
+char readRole(FILE *filePtr) {
 	int count = 0 ;
-	FILE *filePtr = fopen(filePath , "r") ; 
-	char role ; 
+	char role[50] ; 
 		 while (fgets(role, sizeof role, filePtr) != NULL) 
     {
+    
         if (count == 1)
         {
-            return role ; 
-            fclose(filePtr) ; 
+        	printf("%c" , role[0]) ; 
+            return role[0] ; 
         }
         else
         {
             count++;
         }
     }
-    fclose(filePtr);
 	} 	
 void homeFunc(int *choice) {
-      FILE * homePtr ;
-	  printf("What do you want to see: \n1: Hotels\n2: Restaurants\n") ;
+      FILE * homePtr  , * allFilesPtr;
+	  printf("\nWhat do you want to see: \n1: Hotels\n2: Restaurants\n") ;
 	  int ans ;  
 	  scanf("%d" , &ans) ; 
 	  if(ans == 1) {
@@ -44,7 +43,6 @@ void homeFunc(int *choice) {
       char line[50]; 
 			  while(fgets(line, sizeof line, homePtr) != NULL){
 	        		 printf("%s" , line) ; 
-			
 			}
 	fclose(homePtr) ;
 	*choice = ans ;
@@ -81,7 +79,7 @@ void hide_pass(char password[]){
 		}
 	password[counter]='\0';
 }
-void readingDetails(int *counter ,  FILE* filePtr , char *role) {
+void readingDetails(int *counter ,  FILE* filePtr , char role) {
 	system("cls") ; 
 	 char line[50] ; 
 	 int i = 0 ; 
@@ -90,7 +88,32 @@ void readingDetails(int *counter ,  FILE* filePtr , char *role) {
 	if(i == 0) {
 		decrypted_pass(line) ; 
 		printf("Password : %s" , line) ; 
-		
+		i++ ; 
+	} else if(i == 1) {
+			printf("\nRole : %s" , line) ;
+			i++ ;  
+	} else if(i == 2) {
+			printf("Email : %s" , line) ;
+			i++ ;  
+	} else if(i ==3 ) {
+			printf("User Name : %s" , line) ;
+			i++ ;  
+	} else if(i > 3 ){
+		printf("%s" , line) ; 
+		i++ ; 
+	} 
+	}
+	*counter = i  ; 
+}
+void readingCustomer(int *counter , FILE *filePtr , char *role) {
+	system("cls") ; 
+	char line[50] ; 
+	 int i = 0 ; 
+	 while (fgets(line, sizeof line, filePtr) != NULL) 
+    {
+	if(i == 0) {
+		decrypted_pass(line) ; 
+		printf("Password : %s" , line) ; 
 		i++ ; 
 	} else if(i == 1) {
 		    *role = line[0] ; 
@@ -104,37 +127,6 @@ void readingDetails(int *counter ,  FILE* filePtr , char *role) {
 			i++ ;  
 	} else {
 		printf("%s" , line) ; 
-		i++ ; 
-	}
-	}
-	*counter = i  ; 
-}
-void readingCustomer(int *counter , FILE *filePtr , char *role) {
-	system("cls") ; 
-		 char line[50] ; 
-	 int i = 0 ; 
-	 while (fgets(line, sizeof line, filePtr) != NULL) 
-    {
-	if(i == 0) {
-		decrypted_pass(line) ; 
-		printf("Password : %s" , line) ; 
-		
-		i++ ; 
-	} else if(i == 1) {
-		    *role = line[0] ; 
-			printf("\nRole : %s" , line) ;
-			i++ ;  
-	} else if(i == 2) {
-			printf("Email : %s" , line) ;
-			i++ ;  
-	} else if(i ==3 ) {
-			printf("User Name : %s" , line) ;
-			i++ ;  
-	} else if(i ==4) {
-		printf("Previous Hotel Booking Details: %s" , line) ; 
-		i++ ; 
-	} else {
-		printf("%s\t" , line) ; 
 		i++ ; 
 	}
 	}
@@ -155,11 +147,13 @@ typedef struct {
 	float singleBedRoomsCost , doubleBedRoomsCost , tripleBedRoomsCost , totalCost ; 
 }hotelBookDetails;
 int profile(char filePath[]) {
-	char role ; 
 	FILE *filePtr = fopen(filePath , "r")  , *homeHotelPtr , *homeResPtr;
 	int counter = 0 ;  
 	system("cls") ; 
-    readingDetails(&counter , filePtr , &role) ;
+	char role = readRole(filePtr) ; 
+	fclose(filePtr) ; 
+	filePtr = fopen(filePath , "r") ; 
+    readingDetails(&counter , filePtr , role) ;
     fclose(filePtr) ; 
 	char menuAns, line[50] ; 
 	if(counter == 4 && role == 'r') {
@@ -169,6 +163,12 @@ int profile(char filePath[]) {
 	 	scanf("%c" , &menuAns) ;
 	 	menuAns = menuAns < 91 ? menuAns + 26 : menuAns ;  
 	 		 if(menuAns == 'y') {
+	 		 	int restaurantsCount = 0 ;
+	 		filePtr = fopen("restaurantAccounts.txt" ,"r" ) ;  
+			 while(fgets(line , sizeof line , filePtr) != NULL) {
+			 	  restaurantsCount++ ; 
+			 } 	
+			fclose(filePtr); 
 	 		filePtr = fopen(filePath , "a") ; 
 	 		homeResPtr = fopen("home page.txt" , "a") ; 
 		 	int typeCounter , dishesCounter;
@@ -195,8 +195,9 @@ int profile(char filePath[]) {
 					scanf("%d" , &restaurantMenuPrice[i][j]) ; 
 				  }  
 			} 
-			fprintf(filePtr, "%s", name) ; 
-			fprintf(homeResPtr, "%s", name) ; 
+			fprintf(homeResPtr , "\nRestaurant %d" , restaurantsCount + 1) ; 
+			fprintf(filePtr, "\n%s", name) ; 
+			fprintf(homeResPtr, "\n%s", name) ; 
 			fprintf(filePtr , "\nYour Restaurant Menu: ") ; 
 			fprintf(homeResPtr , "\nYour Restaurant Menu: ") ; 
 			  for(i = 0 ;  i < typeCounter ; i++) {
@@ -243,12 +244,19 @@ int profile(char filePath[]) {
 		printf("Do you want to add details of your Hotel ? \n1.Yes\n2.No\n") ;
 		scanf("%d",&choice);
 		if(choice==1){
+			filePtr = fopen("hotelAccounts.txt" ,"r" ) ; 
+			int hotelsCount = 0 ; 
+			 while(fgets(line , sizeof line , filePtr) != NULL) {
+			 	  hotelsCount++ ; 
+			 } 	
+			fclose(filePtr); 
 			filePtr = fopen(filePath , "a") ; 
 			homeHotelPtr = fopen("home page hotels.txt" , "a") ; 
 			printf("--->Hotel Details<---\n");
 			printf("Enter The name of your hotel : ");
 			fflush(stdin);
 			gets(hotel.name);
+			fprintf(homeHotelPtr , "\nHotel %d" , hotelsCount) ; 
 			fprintf(filePtr , "\n%s" , hotel.name) ; 
 			fprintf(homeHotelPtr , "\n%s" , hotel.name) ; 
 			printf("Enter the location of your Hotel : ");
@@ -530,16 +538,35 @@ int profile(char filePath[]) {
 			  	readingDetails(&counter , filePtr , &role) ; 
 				fclose(filePtr) ; 
 				   }		
-			   } else if(counter == 4 && role == 'c' ){
+			   } else if(counter > 3 && role == 'c' ){
 			          int choice ;  
 			         homeFunc(&choice) ; 
 			         char hotelName[50] ; 
 			         if(choice == 1) {
-			         	hotelBookDetails hotelBooking ; 
-			         	printf("\nEnter hotel email which you want to book: ") ; 
+			         	char hotelNo[3]  , fileHotelNo[3] = {0} , hotelEmail[50] = {0};
+						 int i = 0  , j = 0 ;  
+			         	hotelBookDetails hotelBooking ;
+						 hotelBooking.singleBedRooms = 0 , hotelBooking.doubleBedRooms = 0 , hotelBooking.tripleBedRooms = 0 ;  
+			         	printf("\nEnter hotel number which you want to book: ") ; 
 			         	fflush(stdin) ; 
-			         	gets(hotelBooking.hotelEmail) ;
-						strcat(hotelBooking.hotelEmail , ".txt") ;  
+			         	gets(hotelNo) ;
+			         	int length = strlen(hotelNo) ; 
+			         	filePtr = fopen("hotelAccounts.txt" , "r") ;  
+			         	while(fgets(line , sizeof line , filePtr) != NULL) {
+			         		for(i = 0  ; i < length ; i++) {
+			         			fileHotelNo[i] = line[i] ; 
+							 }
+			         		if(strcmp(fileHotelNo , hotelNo) == 0) {
+			         	        int lineLength = strlen(line) ;
+			         	        for(i = i + 1 , j = 0  ; i < lineLength ; i++ , j++) {
+			         	        	hotelEmail[j] = line[i] ; 
+								 }
+							break ; 	  	    	
+						 }
+						 }
+						 fclose(filePtr) ;
+						strcpy(hotelBooking.hotelEmail , hotelEmail) ;
+						hotelBooking.hotelEmail[20] = '\0' ; 
 						filePtr = fopen(hotelBooking.hotelEmail , "r") ; 
 						if(filePtr == NULL) {
 							printf("\nPlease enter correct email: ") ; 
@@ -637,7 +664,6 @@ int profile(char filePath[]) {
 										bedRoomMatch = counter ; 
 								        break ; 
 								}
-							
 							}
 							counter ++ ; 
 						}
@@ -681,26 +707,41 @@ int profile(char filePath[]) {
 					   	    gets(hotelBooking.paymentMethod) ; 
 					   	     time_t t = time(NULL);
                             struct tm tm = *localtime(&t);
+                            char preHotelMatch[30] ;
+							int i , hotelMatch = 0; 
+                             filePtr = fopen(filePath , "r") ;
+							 while(fgets(line , sizeof line , filePtr) != NULL) {
+							 	for(i = 0 ; i < 30 ; i++) {
+							 		preHotelMatch[i] = line[i] ; 
+								 }
+								 if(strcmp(preHotelMatch , "Previous Hotel Booking Details") == 0) {
+								 	hotelMatch = 1 ;
+								 }
+							 	 
+							 } 
+							 fclose(filePtr) ; 
 					   	    filePtr = fopen(filePath , "a") ; 
-					   	    fprintf(filePtr , "\nHotel Booking Details: ") ; 
-					   	    fprintf(filePtr , "\n%s" , hotelName) ; 
-					   	    fprintf(filePtr , "\n%d" , hotelBooking.noOfDays) ; 
-					   	    fprintf(filePtr , "\n%d" , hotelBooking.noOfRooms) ;
+					   	      if(hotelMatch == 0 ) {
+							 	fprintf(filePtr , "\nPrevious Hotel Booking Details: ") ; 
+							 }
+					   	    fprintf(filePtr , "\n\nHotel Name: %s" , hotelName) ; 
+					   	    fprintf(filePtr , "No Of Days: %d" , hotelBooking.noOfDays) ; 
+					   	    fprintf(filePtr , "\nNo Of Rooms: %d" , hotelBooking.noOfRooms) ;
 					   	     if(hotelBooking.singleBedRooms > 0) {
-			           	      fprintf(filePtr , "\n%d" , hotelBooking.singleBedRooms) ;    
-			           	      	fprintf(filePtr , "\n%.0f" , hotelBooking.singleBedRoomsCost) ;
+			           	      fprintf(filePtr , "\nSingle Bed Rooms: %d" , hotelBooking.singleBedRooms) ;    
+			           	      	fprintf(filePtr , "\nSingle Bed Rooms Cost: %.0f" , hotelBooking.singleBedRoomsCost) ;
 					   }
 					    if(hotelBooking.doubleBedRooms > 0) {
-			           		fprintf(filePtr , "\n%d" , hotelBooking.doubleBedRooms) ;
-			           			fprintf(filePtr , "\n%.0f" , hotelBooking.doubleBedRoomsCost) ;
+			           		fprintf(filePtr , "\nDouble Bed Rooms:%d" , hotelBooking.doubleBedRooms) ;
+			           			fprintf(filePtr , "\nDoule Bed Rooms Cost:%.0f" , hotelBooking.doubleBedRoomsCost) ;
 					   }
 					    if(hotelBooking.tripleBedRooms > 0) {
-			           		fprintf(filePtr , "\n%d" , hotelBooking.tripleBedRooms) ;
-			           			fprintf(filePtr , "\n%.0f" , hotelBooking.tripleBedRoomsCost) ;
+			           		fprintf(filePtr , "\nTriple Bed Rooms:%d" , hotelBooking.tripleBedRooms) ;
+			           		fprintf(filePtr , "\nTriple Bed Rooms Cost:%.0f" , hotelBooking.tripleBedRoomsCost) ;
 					   }
-							fprintf(filePtr , "\n%.0f" , hotelBooking.totalCost) ;  
-							fprintf(filePtr , "\n%d-%02d-%02d" , tm.tm_mday, tm.tm_mon + 1,tm.tm_year + 1900) ;        
-							fprintf(filePtr , "\n%s" , hotelBooking.paymentMethod) ;
+							fprintf(filePtr , "\nTotal Cost: %.0f" , hotelBooking.totalCost) ;  
+							fprintf(filePtr , "\nBooking Date: %d-%02d-%02d" , tm.tm_mday, tm.tm_mon + 1,tm.tm_year + 1900) ;        
+							fprintf(filePtr , "\nPayment Method: %s" , hotelBooking.paymentMethod) ;
 					   	    if(strcmp(hotelBooking.paymentMethod , "card") == 0) {
 					   	             printf("\nCard Details: ") ;
 					   	             printf("\nCard No: ") ;
@@ -715,22 +756,23 @@ int profile(char filePath[]) {
 					   	             printf("Enter card cvv: ") ;
 										fflush(stdin) ;  
 					   	             gets(hotelBooking.cvv) ; 
-					   	             fprintf(filePtr , "\n%s" , hotelBooking.cardNo) ; 
-					   	             fprintf(filePtr , "\n%s" , hotelBooking.nameOnCard) ; 
-					   	             fprintf(filePtr , "\n%s" , hotelBooking.expireDate) ; 
-					   	             fprintf(filePtr , "\n%s" , hotelBooking.cvv) ; 
+					   	             fprintf(filePtr , "\nCard Details: ") ; 
+					   	             fprintf(filePtr , "\nCard No: %s" , hotelBooking.cardNo) ; 
+					   	             fprintf(filePtr , "\nName on Card: %s" , hotelBooking.nameOnCard) ; 
+					   	             fprintf(filePtr , "\nExpire Date: %s" , hotelBooking.expireDate) ; 
+					   	             fprintf(filePtr , "\nCvv: %s" , hotelBooking.cvv) ; 
 							   }
 							   fclose(filePtr) ; 
 					   }  
 			   }
 			  filePtr = fopen(filePath, "r") ; 
-			  readingDetails(&counter , filePtr , &role) ;
+			  readingCustomer(&counter , filePtr , &role) ;
 			  fclose(filePtr) ;  
 } 
 }
 int signUpFunc() {
 	char role;
-	char Name[20],email[30] = {0};
+	char Name[20],email[30] = {0} , line[50];
 		char filePath[50] ;
 	printf("For which type you want to create an account(customer , hotel , or resturant)\n(c for customer , h for hotel ,  r for restaurant):");
 	fflush(stdin) ; 
@@ -767,9 +809,8 @@ int signUpFunc() {
 	encrypted_pass(password);
 	system("cls") ;   
 	FILE *fPtr ;
-	FILE *resFPtr ; 
+	FILE *accountFPtr ; 
 	counter = 0 ;
-
 	strcpy(filePath , email) ;  
 	strcat(filePath , ".txt"); 
 		fPtr = fopen(filePath , "a") ;	  
@@ -778,11 +819,26 @@ int signUpFunc() {
 		fprintf(fPtr , "%s\n" , email);  
 		fprintf(fPtr , "%s\n" , Name); 
     fclose(fPtr) ;
-    resFPtr = fopen("restaurantAccounts.txt" , "a") ; 
     if(role == 'r') {
-    	fprintf(resFPtr , "\n%s" , filePath) ; 
+    	accountFPtr = fopen("restaurantAccounts.txt" , "r") ;
+		int accountNo = 0 ; 
+		while(fgets(line , sizeof line , accountFPtr) != NULL) {
+			accountNo++ ; 
+		}
+		fclose(accountFPtr) ; 
+		accountFPtr = fopen("restaurantAccounts.txt" , "a") ;
+    	fprintf(accountFPtr , "%d:%s\n" , accountNo + 1 , filePath) ; 
+	} else if(role == 'h') {
+		accountFPtr = fopen("hotelAccounts.txt" , "r") ; 
+		int accountNo = 0 ; 
+		while(fgets(line , sizeof line , accountFPtr) != NULL) {
+			accountNo++ ; 
+		}
+		fclose(accountFPtr) ; 
+		accountFPtr = fopen("hotelAccounts.txt" , "a") ; 
+    	fprintf(accountFPtr , "%d:%s\n" , accountNo + 1,  filePath) ; 
 	}
-	fclose(resFPtr) ; 
+	fclose(accountFPtr) ; 
     
 	break;
 	}

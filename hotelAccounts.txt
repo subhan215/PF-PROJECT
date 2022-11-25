@@ -1,0 +1,2 @@
+1:hotel1@gmail.com.txt
+2:hotel2@gmail.com.txt

@@ -1,0 +1,23 @@
+Vxekdq45&7
+c
+customer1@gmail.com
+customer1
+Previous Hotel Booking Details: 
+
+Hotel Name: Marine Resort
+No Of Days: 5
+No Of Rooms: 3
+Single Bed Rooms: 3
+Single Bed Rooms Cost: 3450
+Total Cost: 3450
+Booking Date: 25-11-2022
+Payment Method: cash
+
+Hotel Name: Food Center
+No Of Days: 3
+No Of Rooms: 5
+Single Bed Rooms: 5
+Single Bed Rooms Cost: 2250
+Total Cost: 2250
+Booking Date: 25-11-2022
+Payment Method: cash
