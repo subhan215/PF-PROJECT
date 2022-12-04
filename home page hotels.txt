@@ -1,36 +1,16 @@
-
 Hotel 1
-Marine Resort
-National Highway, Karachi
+Pakistan Zindabad
+Saddar
 Hotel Free Facilities: 
-1: Swimming Pool
-2: Gym
-description: This is a good hotel
+1: Bathing
+2: Clothing
+description: this is a good hotel
 --->Room Details<---
-No Of Rooms : 50
+No Of Rooms : 20
 Single Bed Rooms: 
-No Of Rooms: 2
+No Of Rooms: 20
 Per Night Cost: 
-230
+110
 --->Room Facilities<---
 Free Facilities: 
-1: Bathin
-2: Room Cleaning
-Hotel 2
-Food Center
-Burns Road, Karachi
-Hotel Free Facilities: 
-1: Swimming Pool
-2: Cricket Stadium
-description: this hotel name is food center
---->Room Details<---
-No Of Rooms : 10
-Single Bed Rooms: 
-No Of Rooms: 5
-Per Night Cost: 
-150
---->Room Facilities<---
-Triple Bed Rooms: 
-No Of Rooms: 5
-Per Night Cost: 150
---->Room Facilities<---
+1: room Cleaning

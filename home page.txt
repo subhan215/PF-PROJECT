@@ -1,22 +1,11 @@
+Restaurant 1
+The Marine
+Your Restaurant Menu: 
+1: Dish Type : BBQ
+1: Roll 120
+2: Tikka 100
+2: Dish Type : Chinese
+1: Manganese 110
+2: Noodles 140
 
-Restaurant 3The Marine
-Your Restaurant Menu: 
-1: Dish Type : Chinese
-1: Macaroni
-2: Noodles
-2: Dish Type : BBQ
-1: Tikka
-2: Showerma
-1: Dish Type : Chinese
-1: 200
-2: 150
-2: Dish Type : BBQ
-1: 140
-2: 160
-Restaurant 4
-Food Center
-Your Restaurant Menu: 
-1: Dish Type : Bbq
-2: Dish Type : Tiika
-1: Dish Type : Bbq
-2: Dish Type : Tiika
+
