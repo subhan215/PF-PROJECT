@@ -1,0 +1,73 @@
+Vxekdq45&7
+r
+rsetaurant1@gmail.com
+restaurant1@gmail.com
+
+The Marine
+Your Restaurant Menu: 
+1: Dish Type : BBQ
+1: Roll 120
+2: Tikka 250
+2: Dish Type : Chinese
+1: Shashlek 350
+2: Macaroni 300
+All Customer Orders: 
+Customer Name: 
+Customer Phone No: 03083978739
+Order Date: 4-12-2022
+Dishes Details: 
+Dish 1
+Name: Tikka
+Quantity: 4
+Price: 800
+Dish 2
+Name: Shashlek
+Quantity: 1
+Price: 300
+Total Price: 1100
+Payment Method: cash
+Customer Name: Subhan
+Customer Phone No: 03083978739
+Order Date: 4-12-2022
+Dishes Details: 
+Dish 1
+Name: Tikka
+Quantity: 4
+Price: 800
+Total Price: 800
+Payment Method: card
+Card Details: 
+Card No : 4182310000203450
+Name on Card: Subhan
+Expire Date: 6946940-0-6947152
+Cvv: 810
+Customer Name: Subhan
+Customer Phone No: 22323232322
+Order Date: 4-12-2022
+Dishes Details: 
+Dish 1
+Name: Shashlek
+Quantity: 5
+Price: 1500
+Total Price: 1500
+Payment Method: card
+Card Details: 
+Card No : 4182310000203450
+Name on Card: Subhan
+Expire Date: 0-127-0
+Cvv: 810
+Customer Name: Subhan
+Customer Phone No: 03083978739
+Order Date: 4-12-2022
+Dishes Details: 
+Dish 1
+Name: Roll
+Quantity: 5
+Price: 500
+Total Price: 500
+Payment Method: card
+Card Details: 
+Card No : 4182310000203450
+Name on Card: Subhan
+Expire Date: 9-8-2025
+Cvv: 810

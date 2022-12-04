@@ -1,11 +1,12 @@
+
+
+
 Restaurant 1
 The Marine
 Your Restaurant Menu: 
 1: Dish Type : BBQ
 1: Roll 120
-2: Tikka 100
+2: Tikka 250
 2: Dish Type : Chinese
-1: Manganese 110
-2: Noodles 140
-
-
+1: Shashlek 350
+2: Macaroni 300

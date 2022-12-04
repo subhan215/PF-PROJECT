@@ -1,33 +1,36 @@
 Vxekdq45&7
 h
 hotel1@gmail.com
-hotel1
+hotel1@gmail.com
 
-Pakistan Zindabad
+The Marine
 Saddar
-Hotel Free Facilities: 
-1: Bathing
-2: Clothing
-description: this is a good hotel
+description: ssdsdsds
 --->Room Details<---
-No Of Rooms : 20
+No Of Rooms : 23
 Single Bed Rooms: 
-No Of Rooms: 20
+No Of Rooms: 23
 Per Night Cost: 
-110
+120
 --->Room Facilities<---
-Free Facilities: 
-1: room Cleaning
-Hotel Name : Pakistan Zindabad
-No Of Days: 3
+Hotel Name : The Marine
+No Of Days: 4
 No Of Rooms: 5
 Single Bed Rooms: 5
-Single Bed Rooms Cost: 1650
-Total Cost: 1650
+Single Bed Rooms Cost: 2400
+Total Cost: 2400
+Booking Date: 4-12-2022
+Payment Method: cash
+Hotel Name : The Marine
+No Of Days: 4
+No Of Rooms: 5
+Single Bed Rooms: 5
+Single Bed Rooms Cost: 2400
+Total Cost: 2400
 Booking Date: 4-12-2022
 Payment Method: card
 Card Details: 
 Card No : 
-Name on Card: subhan
-Expire Date: 22/12/2025
-Cvv: 123
+Name on Card: Subhan
+Expire Date: 6947152-0-6965600
+Cvv: 810
